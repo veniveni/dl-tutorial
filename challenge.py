@@ -19,10 +19,25 @@ def load_data(train_dir = r'C:\Work\dl-tutorial\hebrew\train'):
     Y = np.array(y)
     return X,Y
 
+def load_data_colab():
+    from google.colab import files
+    import StringIO
+    fnames = files.upload()
+    x = []
+    y = []
+    fnames_keys = list(fnames.keys())
+    fnames_keys.sort()
+    for fname in fnames_keys:
+        x.append(plt.imread(StringIO.StringIO(fnames[fname])))
+        y.append(int(fname[0]))
+    X = np.array(x)
+    Y = np.array(y)
+    return X,Y
+
 def split_train_test(X, Y, train_frac = 0.85):
-    n_samples_per_letter = X.shape[0]/3
+    n_samples_per_letter = int(X.shape[0]/3)
     split = int(train_frac*n_samples_per_letter)
-    r = range(n_samples_per_letter)
+    r = list(range(n_samples_per_letter))
     random.shuffle(r)
     train_indices = r[:split]
     train_indices += map(lambda x: x+n_samples_per_letter, train_indices) + map(lambda x: x + 2*n_samples_per_letter, train_indices)
