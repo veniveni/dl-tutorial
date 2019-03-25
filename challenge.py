@@ -103,7 +103,7 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 print(model.summary())
 
 # Fit the model
-model.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=10, batch_size=200, verbose=2)
+model.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=25, batch_size=200, verbose=2)
 
 # Show training progress
 plt.plot(history.history['acc'], 'b--')
